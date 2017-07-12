@@ -38,6 +38,15 @@ learnjs.problemView = function(data){
     view.find('.check-btn').click(checkAnswerClick)
     view.find('.title').text('Problem #' + programNumber)
     learnjs.applyObject(programData,view);
+
+    if(programNumber < learnjs.programs.length){
+        var buttonItem = learnjs.template('skip-btn');
+        buttonItem.find('a').attr('href','#problem-' + (programNumber + 1));
+        $('.nav-list').append(buttonItem);
+        view.bind('removingView',function(){
+            buttonItem.remove();
+        });
+    }
     return  view;
 }
 learnjs.showView = function(hash){
